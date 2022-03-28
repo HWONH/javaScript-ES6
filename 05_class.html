@@ -1,0 +1,135 @@
+<script>
+    /* ------------------------------ES5 함수 선언문------------------------------ */
+    // 객체 영역
+    const pony={
+        name:"소나타",
+        color:"화이트",
+        start:function(){
+            console.log(this.name+"이(가) 시동");
+            console.log(this); // this라는 지시대명사는 나를 담고 있는 객체를 지칭
+        },
+        drive:function(){
+            console.log(this.name+"이(가) 주행");
+        },
+        stop:function(){
+            console.log(this.name+"이(가) 멈춤");
+        },
+        parking:function(){
+            console.log(this.name+"이(가) 주차");
+        }
+    };
+
+    console.log(pony.start());
+    console.log(pony.drive());
+    console.log(pony.stop());
+    console.log(pony.parking());
+
+    /* ------------------------------프로토타입------------------------------ */
+    // 프로토타입 : 객체의 구조화, 재사용 가능
+    // 즉시실행함수를 호출하므로써 (function(){}) Car이라는 객체를 구조화 및 대기화 시킴
+    const Car=(function(){ // @1
+        function Car(name, color){ // @2
+            this.name=name;
+            this.color=color;
+            console.log(this);
+        }
+        Car.prototype.start=function(){
+            console.log(this.name+"이(가) 시동");
+        }
+        Car.prototype.drive=function(){
+            console.log(this.name+"이(가) 주행");
+        }
+
+        console.log("즉시실행함수 실행");
+        return Car; // @2를 @1로 던져줌
+    })(); // 즉식실행함수;페이지가 로딩되는 동시에 ()함수를 호출 실행
+
+    const avante=new Car("아반떼", "레드");
+    avante.start();
+
+    const genesis=new Car("제네식스", "블랙");
+    genesis.drive();
+
+    // 다음의 둘은 같은 객체를 생성한다
+    // 객체 생성1
+    var obj1=new Object();
+    obj1.name="아이폰";
+    console.log(obj1);
+    // 객체 생성2
+    var obj2={
+        name:"아이폰"
+    }
+    console.log(obj2);
+    /* ------------------------------ES6 객체를 클래스화 시킴------------------------------ */
+    // 클래스 : 마치 실행을 기다리고 있는 함수문처럼 웹 브라우저에서 하나의 공간을 차지하게 만듦
+    class NewCar {
+        constructor(name, color){ // 생성자
+            this.name=name;
+            this.color=color;
+            console.log(this);
+        }
+        start(){
+            console.log(this.name+"이(가) 시동");
+        }
+        drive(){
+            console.log(this.name+"이(가) 주행");
+        }
+    }
+    const NewMyCar=new NewCar("뉴 아반떼", "블루");
+    NewMyCar.start();
+    NewMyCar.drive();
+    /* ------------------------------실습문제------------------------------ */
+    // 클래스화를 이용하여 콘솔 창에 "장바구니에 담긴 물건은 곰인형(매개변수)입니다." 출력
+
+    class Cart {
+        constructor(name){
+            this.name=name;
+            console.log(this);
+        }
+        item(){
+            console.log("장바구니에 담긴 물건은 "+this.name+"입니다");
+        }
+    }
+    const MyCart=new Cart("곰인형");
+    MyCart.item();
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
