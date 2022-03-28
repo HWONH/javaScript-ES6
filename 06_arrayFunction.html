@@ -1,0 +1,335 @@
+<script>
+    //#1 배열을 활용한 방법
+    console.log([0, 1, 2, 3, 4, 5, 6]);
+
+    console.log([0, 1, 2, 3, 4, 5, 6].concat(7, 8, 9));
+
+    console.log([0, 1, 2, 3, 4, 5, 6].concat({$name:"공효진"}));
+
+    console.log([0, 1, 2, 3, 4, 5, 6].map(x => x*2));
+    // 각 배열로 접근하여 계산값을 적용한 결과를 반환
+
+    console.log([0, 1, 2, 3, 4, 5, 6].filter(x => x%2 == 0));
+    // 각 배열로 접근하여 부합(필터)하는 값만 반환
+    // 각 배열에서 2로 나눈 나머지가 0인 값만 필터 후 배열로 저장
+
+    console.log([0, 1, 2, 3, 4, 5, 6].filter(() => false)); // []
+    // fliter가 만들어 내는 배열의 각각의 값이 (매개변수)로 접근하여 false를 변환받기 때문에 배열로 반환되지 않음
+    console.log([0, 1, 2, 3, 4, 5, 6].filter(() => true)); // [0, 1, 2, 3, 4, 5, 6]
+    // fliter가 만들어 내는 배열의 각각의 값이 (매개변수)로 접근하여 true를 변환받기 때문에 배열로 반환;기존 저장된 문서로부터 초기화를 시켜야할 경우
+
+    /* ------------------------------map() 함수------------------------------ */
+    // map() 함수를 사용한 결과값으로 제곱근으로 배열화
+    var numbers=[1,2,3,4,5,6,7,8,9,10];
+    var doubleNumbers=numbers.map(function(v){
+        console.log(v); // 각 인덱스가 갖고 있는 값
+        return v*2;
+    });
+    // console.log(doubleNumbers()); // function은 map 함수가 가지고 있는 것으로 doubleNumbers는 function을 map함수를 통해 간접적으로 호출하는 것으로 ()를 제거
+    console.log(doubleNumbers);
+
+    var doubleNumbers=numbers.map(v => v*2);
+    console.log(doubleNumbers);
+    /* ------------------------------실습문제1------------------------------ */
+    // users의 전화번호 앞에 "010"을 추가하여 배열로 반환(map()함수 사용)
+    // 주의사항 : 객체라는 부분 참조
+    var users=[
+        {name:"현혜원", age:26, kor:68, eng:80, tel:"2222-3333"},
+        {name:"현혜정", age:28, kor:80, eng:78, tel:"4444-3333"},
+        {name:"엄경화", age:53, kor:92, eng:60, tel:"5555-3333"},
+        {name:"현재영", age:53, kor:66, eng:79, tel:"6666-3333"},
+        {name:"엄현정", age:50, kor:84, eng:87, tel:"7777-3333"},
+        {name:"배지석", age:24, kor:85, eng:96, tel:"8888-3333"},
+        {name:"배준석", age:18, kor:77, eng:64, tel:"9999-3333"}
+    ];
+
+    var modifyTel=users.map(function(a){
+        console.log(a);
+        console.log(a.tel);
+        console.log("010-"+a.tel);
+        a.tel = "010-"+a.tel;
+        return a
+    });
+    console.log(modifyTel);
+
+    var modifyTel=users.map(a => { // multilize block
+        a.tel = "010-"+a.tel;
+        return a;
+    });
+    console.log(modifyTel);
+    /* ------------------------------실습문제2------------------------------ */
+    // users의 배열 데이터에 kor과 eng의 점수를 합산한 총점을 추가(총점의 속성명은 total)
+
+    var sumScore=users.map(function(v){
+        v.total=v.kor+v.eng;
+        return v;
+    });
+    console.log(sumScore);
+
+    var sumScore=users.map(v=>{
+        v.total=v.kor+v.eng;
+        return v;
+    });
+    console.log(sumScore);
+    /* ------------------------------filter() 함수------------------------------ */
+    const nums=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    /* 
+    const oddNum=nums.filter(function(v){
+        return v%2==1;
+    });
+     */
+    const oddNum=nums.filter(v => v%2==1);
+    console.log(oddNum);
+    /* 
+    const evenNum=nums.filter(function(v){
+        return v%2==0;
+    });
+     */
+    const evenNum=nums.filter(v => v%2==0);
+    console.log(evenNum);
+
+    var users=[
+        {name:"현혜원", age:26, kor:68, eng:80, tel:"2222-3333"},
+        {name:"현혜정", age:28, kor:80, eng:78, tel:"4444-3333"},
+        {name:"엄경화", age:53, kor:92, eng:60, tel:"5555-3333"},
+        {name:"현재영", age:53, kor:66, eng:79, tel:"6666-3333"},
+        {name:"엄현정", age:50, kor:84, eng:87, tel:"7777-3333"},
+        {name:"배지석", age:24, kor:85, eng:96, tel:"8888-3333"},
+        {name:"배준석", age:18, kor:77, eng:64, tel:"9999-3333"}
+    ];
+
+    const overAge30=users.filter(function(v){
+        console.log(v);
+        return v.age >= 30;
+    });
+    console.log(overAge30);
+    /* 
+    const overAge30=users.filter(v => v.age>=30);
+    console.log(overAge30);
+     */
+
+    const lessKor80=users.filter(v => v.kor<80);
+    console.log(lessKor80);
+
+    const score=users.filter(v => v.kor>=80 && v.eng>=80 && v.kor+v.eng>=160);
+    console.log(score);
+
+    const score2=users.filter(function(v){
+        return v.kor<80 || v.eng<80 || v.kor+v.eng<150;
+    });
+    console.log(score2);
+    /* ------------------------------forEach() 함수------------------------------ */
+    // 반복문의 종류
+    const arr_str=["a", "b", "c", "d", "e"];
+    
+    for(let i=0;i<arr_str.length;i++) console.log(arr_str[i]);
+    
+    for(let i in arr_str) console.log(arr_str[i]); // for in문 : 배열의 갯수만큼 해당하는 배열 데이터 값을 가져온다
+    
+    for(let v of arr_str) console.log(v); // for of문 : 배열 데이터가 갖고 있는 데이터의 값을 가져온다
+    
+    arr_str.forEach(function(v,i){ // i(배열의 인덱스 번호) v(실제 데이터 값)
+        console.log(i+"번째 값 : "+v);
+    });
+    arr_str.forEach((v,i) => {
+        console.log(i+"번째 값 : "+v);
+    });
+
+    // 자바 스크립트를 활용하여 반복문을 선언
+    const qs="Banana=10&Apple=20&Orange=30";
+
+    function parse_01(qs){
+        // substr(a,문자개수) : 문자열에 a 인덱스부터 지정한 문자 개수만큼 문자열을 반환
+        // split(“문자”) : 지정한 문자를 기준으로 문자 데이터를 나누어 배열에 저장하여 반환
+        var queryString=qs.substr(0,qs.length);
+        console.log(queryString); // Banana=10&Apple=20&Orange=30
+        var chunks=queryString.split("&"); // ["Banana=10", "Apple=20", "Orange=30"]
+        console.log(chunks);
+
+        var result={};
+        for(var i=0;i<chunks.length;i++){
+            var parts=chunks[i].split("="); // 각 인덱스 번호에 해당하는 문자 배열 데이터로부터 "="이라는 문자를 기준으로 각 문자 데이터를 배열 데이터로 분리하고 문자 데이터로 배열에 저장
+            console.log(parts);
+
+            var key=parts[0];
+            console.log(key);
+
+            var value=Number(parts[1]);
+            console.log(value);
+
+            result[key]=value;      // obj_02["name"]="아이폰"
+            console.log(result[key]);
+            console.log(result); // 단계별 변화
+        }
+        console.log(result); // 최종 변화
+        return result;
+    };
+    console.log(qs);
+    const parse_result_01=parse_01(qs); /* qs 제거시 실행안됨 check! */
+    console.log(parse_result_01);
+    /* ------------------------------ES6 자바스크립트에서 활용한 구문------------------------------ */
+    /* 
+    function parse_02(qs){
+        const queryString=qs.substr(0,qs.length);
+        var chunks=queryString.split("&");
+        const result={};
+        chunks.forEach(function(c){
+            const [key, value]=c.split("=");
+            console.log(key);
+            console.log(value);
+            result[key]=Number(value);
+            console.log(result[key]);
+        });
+        return result;
+    };
+    const parse_result_02=parse_02(qs);
+    console.log(parse_result_02);
+     */
+    const parse_02=qs => {
+        const queryString=qs.substr(0,qs.length);
+        var chunks=queryString.split("&");
+        const result={};
+        chunks.forEach(c => {
+            const [key, value]=c.split("=");
+            console.log(key);
+            console.log(value);
+            result[key]=Number(value);
+            console.log(result[key]);
+        });
+        return result;
+    };
+    const parse_result_02=parse_02(qs);
+    console.log(parse_result_02);
+
+    /* 
+    // v.name과 v["name"]비교
+    var obj_01=new Object();
+    var obj_02=new Object();
+    obj_01.name="아이폰";       // obj_01={name: "아이폰"} 속성명 고정
+    obj_02["name"]="아이폰"     // obj_02={name: "아이폰"} 속성명 변경 가능
+    console.log(obj_01);
+    console.log(obj_01.name);
+    console.log(obj_02);
+    console.log(obj_02.name);
+
+    obj_str="selphone"
+    obj_02[obj_str]="에어블랙"
+    console.log(obj_02);
+    
+    obj_01.obj_str="아이폰";
+    console.log(obj_01);
+     */
+    /* ------------------------------ES6 map() 함수 이용하여 결과값 변환------------------------------ */
+    /* 
+    function parse_03(qs){
+        const queryString=qs.substr(0,qs.length);
+        var chunks=queryString.split("&");
+        const result=chunks.map(function(c){
+            const [key, value]=c.split("=");
+            console.log(key);
+            console.log(value);
+            return {key : key, value: value};
+        });
+        return result;
+    };
+    */
+    const parse_03=qs => {
+        const queryString=qs.substr(0,qs.length);
+        var chunks=queryString.split("&");
+        const result=chunks.map(c => {
+            const [key, value]=c.split("=");
+            console.log(key);
+            console.log(value);
+            return {key : key, value: value};
+        });
+        return result;
+    };
+
+    const parse_result_03=parse_03(qs);
+    console.log(parse_result_03);
+    /* ------------------------------reduce() 함수----------------------------- */
+    // reduce() 함수 : 배열을 객체로 전환하는 과정
+    // reduce(function(t, v){... return}) t(초기값)
+    var numbers_01=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var sum_01=numbers_01.reduce(function(t,v,i,a){
+        console.log("t : "+t); // 누적 합산 값
+        console.log("v : "+v); // 2~10
+        console.log("i : "+i); // 1~9
+        console.log("a : "+a); // 
+
+        return t + v;
+    });
+    console.log(sum_01);
+
+    /* 
+                    t+v 누적 합산 값                                    데이터 값
+    순환 01회차     t:0(초기값)                                         v:1
+    순환 02회차     t:0+1                                               v:2
+    순환 03회차     t:0+1+2                                             v:3
+    순환 04회차     t:0+1+2+3                                           v:4
+    순환 05회차     t:0+1+2+3+4                                         v:5
+    순환 06회차     t:0+1+2+3+4+5                                       v:6
+    순환 07회차     t:0+1+2+3+4+5+6                                     v:7
+    순환 08회차     t:0+1+2+3+4+5+6+7                                   v:8
+    순환 09회차     t:0+1+2+3+4+5+6+7+8                                 v:9
+    순환 10회차     t:0+1+2+3+4+5+6+7+8+9                               v:10
+    순화 최종회차   t:0+1+2+3+4+5+6+7+8+9+10                            최종값 출력(55)
+    
+    */
+    
+    var top = numbers_01.reduce(function(t,v,i,a){
+        return t+v;
+    }, 1000);
+
+    /* 
+    reduce 함수의 첫번째 인자
+    function(t,v,i,a){
+        return t+v;
+    }
+    reduce 함수의 두번째 인자
+    t의 초기 값임(t=1000)
+     */
+    
+    //  https://movie.naver.com/movie/bi/mi/basic.nhn?code=30688
+    // querystring : url 주소창에서 code=30688
+
+    function parse_04(qs){
+        const queryString=qs.substr(0,qs.length);
+        const chunks=queryString.split("&");
+        return chunks
+            .map((c) => {
+                const [key, value]=c.split("="); // key="banana", value="10"
+                return {key, value}; // {key:"banana", value:"10"}
+            })
+            .reduce((result, item) => ({
+                ...result,
+                [item.key]:item.value,
+            }), {});
+            // {} : 객체를 초기값으로 선언 후, 각 항목을 추가 시키는 부분
+    }
+
+    console.log(parse_04(qs));
+    // reduce() 함수는 누적에 대한 데이터 값을 반영하기 위함
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
