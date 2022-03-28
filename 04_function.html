@@ -1,0 +1,100 @@
+<script>
+    /* ------------------------------ES6에서 도입된 부분은 화살표 함수(=>)------------------------------ */
+
+    // 화살표 함수(=>) : ES6에서 도입된 부분
+    // 기존 구문 함수(매개변수argument)
+    function add1(a,b){
+        return a+b;
+    }
+    console.log(add1(7,8));
+
+    // const로 변수 선언하여 저장시, 데이터의 함수문을 담을 수 있음
+    const add2=function(a,b){
+        return a*b;
+    };
+    console.log(add2(7,8));
+
+    // 화살표 함수를 적용할 때, function제거 / 스코프를 대신하여 =>로 표기 / return문 제거
+    const add3=(a,b)=>a*b;
+    console.log(add2(7,8));
+
+    // 매개변수가 하나만 존재할 때
+    const add4=(g)=>g+4;
+    console.log(add4(6,7)); // 매개변수 g에 6대입
+
+    // 매개변수가 하나만 존재할 때, 매개변수를 감싸고 있는 ()를 제거 가능
+    const add5=h=>h+10;
+    console.log(add5(4,8)); // 매개변수 h에 4대입
+
+    // 매개변수가 존재하지 않을 때
+    const add6=function(){
+
+    };
+    console.log(add6);
+    console.log(add6()); // undefined
+
+    const add7=()=>{};
+    console.log(add7); // 빈 함수 구문을 잡을 뿐 실행을 하지 않는다
+    console.log(add7()); // undefined
+    /* ------------------------------ES5 함수 선언문------------------------------ */
+    // hoist : 소형의 감아올리는 장치
+    // hoisting : 함수 안에 선언된 구문들을 모두 끌어올려서 해당 함수의 유효범위({})를 최상단에 선언
+
+    fnc1(); // hoisting 적용된 상태;로딩시점에서, 함수 호출문이 아직 로딩되지 않은 상태에서도 함수문 호출 가능
+    function fnc1(){
+        console.log("fnc1 함수구문 실행");
+    }
+    // fnc1(); // 함수문의 호출 위치는 상관이 없다
+
+    // const 변수 선언은 hoisting 개념 적용 불가
+    // fnc2(); // 에러 발생 이유 : [개발자 모드] Cannot access 'fnc2' before initialization
+    const fnc2=function(){
+        console.log("fnc2 함수구문 실행");
+    };
+    fnc2();
+    /* ------------------------------실습문제------------------------------ */
+    // 세 수의 합 계산, 함수 호출문을 통해서 1,2,3을 함수문에 전달 화살표 함수(arrow function)를 활용하여 최종 합계를 콘솔창에 출력하시요(매개변수에 return 존재)
+    const add8=(a,b,c)=>a+b+c;
+    console.log(add8(1,2,3));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
