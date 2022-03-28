@@ -1,0 +1,48 @@
+<script>
+    // asynchrone : 비동기 함수
+    // ES5
+    /* 
+    var hero={
+        name : "골리앗",
+        action : function(msg){
+            console.log("앞으로 이동한다."+msg+"공격한다.");
+        }
+    };
+    console.log(hero.action("다윗"));
+     */
+
+    function work1(onDone){
+        setTimeout(function(){
+            onDone("작업-01 완료"); // 비동기함수에서 실행한다.
+            console.log(onDone);
+            /* 
+            f (msg1){
+            console.log("실행 후 1000ms"+msg1);
+            }
+             */
+        }, 1000);
+    }
+    function work2(onDone){
+        setTimeout(function(){
+            onDone("작업-02 완료");
+        }, 2000);
+    }
+    function work3(onDone){
+        setTimeout(function(){
+            onDone("작업-03 완료");
+        }, 3000);
+    }
+
+    // 함수문과 함수문을 서로 연결하여 나온 실행에 대한 결과값을 msg1에 return 없이 반환
+    work1(function(msg1){
+        // console.log(msg1);
+        console.log("실행 후 1000ms"+msg1);
+        work2(function(msg2){
+            console.log("실행 후 3000ms"+msg2);
+            work3(function(msg3){
+                console.log("실행 후 6000ms"+msg3);
+            });
+        });
+    });
+    // 순서대로 결과값을 도출하게되는데, 함수문 내부의 또 다른 함수문을 작성해야한다면 양이 많아질 수 밖에 없음 => 생산자가 내부의 어떤 결과값을 전역변수로 도출하는 과정에서 반복적으로 return문도 함께 많이질 수 밖에 없기 때문에 추후 중간 부분 수정이 발생할 경우 찾는 것이 어려움 => 콜백지목
+</script>
